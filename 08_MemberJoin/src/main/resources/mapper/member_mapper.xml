@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<!-- 이 xml은 어떤 interface와 연결되는가 -->
+<!-- 공백이 있거나 오타가 있는지 확인해야한다. (그냥 복붙하자) -->
+<mapper namespace="ko.co.gudi.dao.MemberDAO">
+
+	<!-- id : 해당 인터페이스와 어떤 추상 메서드와 연결되어 있는가?  -->
+	<!-- parameterType : 값을 가져올 때 어떤 형태로 가져오는지 명시 -->
+	<insert id="join" parameterType="map">
+		INSERT INTO member(id,pw,name,age,gender,email)
+			VALUES(#{id},#{pw},#{name},#{age},#{gender},#{email})
+	</insert>
+
+</mapper>

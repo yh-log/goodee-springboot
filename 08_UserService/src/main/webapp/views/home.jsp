@@ -5,12 +5,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<style>
-
-</style>
 </head>
 <body>
-		<h4>${msg}</h4>
+	<h3>메인 페이지</h3>
+	<a href="loginForm">로그인 페이지로 이동</a>
 </body>
 <script>
 
