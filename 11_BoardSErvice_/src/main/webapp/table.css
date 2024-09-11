@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+body {
+  background: #1E1930;
+  color: #D2D1D5;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+h2{
+    font-size: 24px;
+    color: #6A24FE;
+    margin-bottom: 20px;
+}
+tr:nth-child(even) {
+  background-color: #2e2649;
+}
+tr:nth-child(odd) {
+  background-color: #423b5b;
+}
+th {
+  background-color: #342F44;
+  color: white;
+}
+.noBorder {
+    border:none !important;
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.MemberDAO">
+	<insert id="join" parameterType="map">
+		INSERT INTO member(id, pw, name, age, gender, email)
+			VALUES(#{id}, #{pw}, #{name}, #{age}, #{gender}, #{email})
+	</insert>
+	
+	<select id="login" resultType="String">
+		SELECT id FROM member WHERE id = #{param1} AND pw = #{param2}
+	</select>
+	
+	<select id="list" resultType="kr.co.gudi.dto.MemberDTO">
+		SELECT id, name, age FROM member
+	</select>
+	
+	<select id="detail" resultType="kr.co.gudi.dto.MemberDTO">
+		SELECT * FROM member WHERE id = #{param1}
+	</select>
+	
+	<!-- 단일 파라미터가 왔어도 parameterType 을 사용하면 이름을 쓸 수 있다. -->
+	<!--  	이름을 쓸 경우 들어오는 데이터와 타입을 동일하게 맞춰줘야 한다. -->
+	<delete id="del" parameterType="String">
+		DELETE FROM member WHERE id = #{id}
+	</delete>
+	
+	
+	
+	
+</mapper>

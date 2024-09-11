@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.BoardDAO">
+	<select id="list" resultType="kr.co.gudi.dto.BoardDTO">
+		SELECT idx,subject,user_name,bHit,reg_date 
+			FROM bbs ORDER BY idx DESC
+	</select>
+	
+	<!-- 주의사항 2. mybatis에서 설정을 해줘야 한다. -->
+	<!-- 
+		useGeneratedKeys="true" <- key generate 설정을사용할건지
+		keyColumn="idx"			<- 가져올 PK 컬럼 이름
+		keyProperty="idx"		<- 저장할 DTO 변수 명
+	 -->
+	<insert id="write" 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+	
+	parameterType="kr.co.gudi.dto.BoardDTO">
+		INSERT INTO bbs(user_name,subject,content)
+			VALUES(#{user_name},#{subject},#{content})
+	</insert>
+	<select id="detail" resultType="kr.co.gudi.dto.BoardDTO">
+		SELECT * FROM bbs WHERE idx = #{param1}
+	</select>
+	<update id="uphit">
+		UPDATE bbs set bHit = bHit + 1 where idx=#{param1}
+	</update>
+	
+	<insert id="fileWrite">
+		INSERT INTO files(idx, ori_filename, new_filename)
+			VALUES(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<select id="files" resultType="kr.co.gudi.dto.FileDTO">
+		SELECT * FROM files WHERE idx = #{param1}
+	</select>
+</mapper>
