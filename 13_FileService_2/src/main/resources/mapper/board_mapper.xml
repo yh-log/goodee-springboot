@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.mapper.BoardMapper">
+
+	<select id="list" resultType="kr.co.gudi.vo.BoardVO">
+		SELECT * FROM bbs ORDER BY idx DESC
+	</select>
+	
+	<insert
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+		id="write" parameterType="kr.co.gudi.vo.BoardVO">
+		INSERT INTO bbs(user_name, subject, content)
+			VALUES(#{user_name},#{subject},#{content})
+	</insert>
+	
+	<insert id="fileWrite">
+		INSERT INTO files(new_filename, ori_filename, idx)
+			VALUES(#{param1},#{param2},#{param3})
+	</insert>
+	
+	<update id="bHit">
+		UPDATE bbs SET bHit = bHit+1 WHERE idx = #{param1}
+	</update>
+	
+	<select id="detail" resultType="kr.co.gudi.vo.BoardVO">
+		SELECT * FROM bbs WHERE idx = #{param1}
+	</select>
+	
+	<select id="fileList" resultType="kr.co.gudi.vo.FileVO">
+		SELECT * FROM files WHERE idx = #{param1}
+	</select>
+	
+	<delete id="del">
+		DELETE FROM bbs WHERE idx = #{param1}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

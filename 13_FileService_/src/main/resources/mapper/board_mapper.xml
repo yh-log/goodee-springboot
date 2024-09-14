@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.mapper.BoardMapper">
+
+	<select id="list" resultType="kr.co.gudi.vo.BoardVO"> 
+		SELECT * FROM bbs ORDER BY idx DESC
+	</select>
+	
+		<insert id="write" 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+	
+	parameterType="kr.co.gudi.vo.BoardVO">
+		INSERT INTO bbs(user_name, subject, content)VALUE(#{user_name}, #{subject}, #{content})
+	</insert>
+	
+	<insert id="fileWrite">
+		INSERT INTO bbs(ori_filename, new_filename, idx)VALUES(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

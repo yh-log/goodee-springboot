@@ -23,4 +23,6 @@ public interface BoardDAO {
 
 	List<FileDTO> files(String idx);
 
+	int del(String idx);
+
 }

@@ -29,6 +29,15 @@
 				<th>Content</th>
 				<td>${detail.content}</td>
 			</tr>
+			<c:if test="">
+				<tr>Img</tr>
+				<c:forEach items="" var="">
+					<td>
+						<img src="" alt=""/>
+					</td>
+				</c:forEach>
+			</c:if>
+			
 			<tr>
 				<th>Data</th>
 				<td>${detail.reg_date}</td>

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dao.BoardDAO;
 import kr.co.gudi.dto.BoardDTO;
@@ -29,8 +30,9 @@ public class BoardService {
 		return board_dao.detail(idx);
 	}
 
-	public void upload(Map<String, String> params) {
+	public void upload(Map<String, String> params, MultipartFile[] files) {
 		int row = board_dao.upload(params);
+		logger.info("params {} : ", params);
 		logger.info("insert된 행 : " + row);
 		
 	}

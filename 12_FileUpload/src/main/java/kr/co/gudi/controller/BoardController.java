@@ -3,13 +3,18 @@ package kr.co.gudi.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.standard.MultipleDocumentHandling;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.BoardDTO;
 import kr.co.gudi.service.BoardService;
@@ -45,15 +50,11 @@ public class BoardController {
 	public String detail(int idx, Model model) {
 		
 		logger.info("idx : " + idx);
-		String page = "redirect:/list";
+		String page = "";
 		
-		BoardDTO dto = null;
-		dto = board_service.detail(idx);
+		board_service.detail(idx, model);
 		
-		if(dto != null) {
 			page = "detail";
-			model.addAttribute("info", dto);
-		}
 		
 		return page;
 	}
@@ -63,12 +64,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="write")
-	public String write(@RequestParam Map<String, String> params, Model model) {
+	public String write(MultipartFile[] files, @RequestParam Map<String, String> params, Model model) {
 		
 		logger.info("params : {}", params);
-		
-		String msg = board_service.write(params);
-		model.addAttribute("msg", msg);
+		board_service.write(params, files);
 		
 		return "redirect:/list";
 	}
@@ -91,6 +90,13 @@ public class BoardController {
 		logger.info("params : {}", params);
 		board_service.update(params);
 		return "redirect:/detail?idx=" + params.get("idx");
+	}
+	
+	@RequestMapping(value="/download")
+	public ResponseEntity<Resource> download(String new_filename, String ori_filename) {
+		logger.info("controller : " + ori_filename + "/" + new_filename);
+		
+		return board_service.download(new_filename, ori_filename);
 	}
 	
 }

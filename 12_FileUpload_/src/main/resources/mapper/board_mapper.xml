@@ -39,4 +39,11 @@
 	<select id="files" resultType="kr.co.gudi.dto.FileDTO">
 		SELECT * FROM files WHERE idx = #{param1}
 	</select>
+	
+	<delete id="del">
+		DELETE FROM bbs WHERE idx = #{param1}
+	</delete>
+	
+	
+	
 </mapper>

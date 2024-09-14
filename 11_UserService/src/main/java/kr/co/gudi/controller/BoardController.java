@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.BoardDTO;
 import kr.co.gudi.service.BoardService;
@@ -53,21 +54,21 @@ public class BoardController {
 		return page;
 	}
 	
-	@RequestMapping(value="write")
-	public String write() {
+	@RequestMapping(value="/writeForm")
+	public String writeForm() {
 		return "write";
 	}
 	
 	@RequestMapping(value="/upload")
-	public String upload(@RequestParam Map<String, String> params, Model model, HttpSession session) {
+	public String upload(MultipartFile[] files ,@RequestParam Map<String, String> params, Model model, HttpSession session) {
 		String page = "";
+		logger.info("params {} : ", params);
 		
 		if(session.getAttribute("loginId")==null) {
 			page="login";
 			model.addAttribute("result", "로그인이 필요한 서비스입니다.");
 		}else {
-			board_service.upload(params);
-			
+			board_service.upload(params, files);
 			page = "redirect:/boardlist";
 		}
 		return page;

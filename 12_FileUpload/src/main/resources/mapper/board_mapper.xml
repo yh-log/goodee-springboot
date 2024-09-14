@@ -14,8 +14,14 @@
 		SELECT * FROM bbs WHERE idx = #{param1}
 	</select>
 	
-	<insert id="write" parameterType="map">
-		insert into bbs(user_name, subject, content) values(#{user_name}, #{subject}, #{content})
+	<insert id="write" 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+	
+	parameterType="kr.co.gudi.dto.BoardDTO">
+		INSERT INTO bbs(user_name,subject,content)
+			VALUES(#{user_name},#{subject},#{content})
 	</insert>
 	
 	<delete id="del">
@@ -29,6 +35,15 @@
 	<update id="update" parameterType="map">
 		UPDATE bbs SET subject = #{subject}, content = #{content} WHERE idx = #{idx}
 	</update>
+	
+	<insert id="filewrite">
+		INSERT INTO files(idx, ori_filename, new_filename)
+			VALUES(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<select id="files" resultType="kr.co.gudi.dto.FileDTO">
+		SELECT * FROM files WHERE idx = #{param1}
+	</select>
 	
 
 </mapper>

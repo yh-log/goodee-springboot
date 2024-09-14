@@ -1,0 +1,21 @@
+<thml>
+    <head>
+        <title>우리가 사용했던 form으로 전송 방식</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <!--메서드 명을 입력하는건 다 get방식이어서 그냥 url로 입력해도 다 나온다.-->
+        <form action="http://localhost:8080/14_RestAPI/map"> <!--서버 밖에 있으니까 절대경로를 적어줘야 한다.-->
+            <input type="submit" value="map 형태로 받기"/>
+        </form>
+        <form action="http://localhost:8080/14_RestAPI/object"> <!--서버 밖에 있으니까 절대경로를 적어줘야 한다.-->
+            <input type="submit" value="object 형태로 받기"/>
+        </form>
+        <form action="http://localhost:8080/14_RestAPI/list"> <!--서버 밖에 있으니까 절대경로를 적어줘야 한다.-->
+            <input type="submit" value="list 형태로 받기"/>
+        </form>
+    </body>
+
+    <script>
+    </script>
+</thml>

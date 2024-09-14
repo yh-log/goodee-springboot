@@ -1,6 +1,9 @@
 package kr.co.gudi.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +14,11 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -93,5 +101,51 @@ public class BoardService {
 		
 		model.addAttribute("info", bbs);
 		model.addAttribute("files", files);
+	}
+
+	public void del(String idx) {
+		// bbs 삭제 -> files 도 삭제 -> 파일 삭제는 어떻게? (이름도 지워짐)
+		// 특정 파일을 식별할 수 있는 key(idx) 를 삭제 전에 얻어낸다. -> bbs 삭제 -> file 삭제
+		
+		// 1. idx를 가지고 files 의 new_filename을 알아내야 한다. (DB가 지워진 후에 컴퓨터에 있는 사진을 삭제하기 위함)
+		List<FileDTO> fileList = boardDAO.files(idx); // 이미 있던 메서드 활용
+		
+		// 2. bbs에 있는 데이터 삭제 -> files 데이터도 삭제됨
+		int row = boardDAO.del(idx);
+		logger.info("delete row : " + row);
+		if(row>0) { // 3. DB에서 삭제 성공 -> 컴퓨터에 있는 file 삭제
+			for (FileDTO dto : fileList) { // 리스트로 받아왔기때문에 for문으로 꺼내주기
+				File file = new File("C:/upload/" + dto.getNew_filename()); // File 객체 활용
+				if(file.exists()) {
+					boolean success = file.delete();
+					logger.info(dto.getNew_filename() + " delete : " + success);
+				}
+			}
+		}
+	}
+
+	public ResponseEntity<Resource> download(String new_filename, String ori_filename) {
+		
+		// Header (보낼 컨텐트 타입이 들어가야 한다, 형태(문자|파일), 파일일 경우 파일명이 들어가야 한다.)
+		HttpHeaders header = new HttpHeaders();
+		
+		// 본문 = FileSystem을 이용해 특정 위치의 파일을 가져옴
+		Resource res = new FileSystemResource("C:/upload/" + new_filename);
+		
+		try {
+			// content-type : image, text, binary ...
+			// application/octet-stream = binary
+			header.add("content-type", "application/octet-stream");
+			// 한글 파일명은 깨지기 때문에 특수한 처리를 해줘야 한다.
+			String encode_name = URLEncoder.encode(ori_filename, "UTF-8");
+			// content-Disposition : 형태(문자 inline |파일 attachment) 지정 -> 파일일 경우 내가 저장할파일명을 지정
+			header.add("content-Disposition", "attachment;filename=\"" + encode_name +"\""); // 파일 name은 "" 로 감싸줘야 하기 때문에 이스케이프 문자 사용
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		// body(본문) header(사전정보) 상태값(200,400,500.... 에러) 에러를 보내면 에러라고 뿌리기 때문에 잘 안쓴다
+		return new ResponseEntity<Resource>(res, header, HttpStatus.OK); // 아무일 없을 때 ok(정상) 이라고 하기로 함
 	}
 }

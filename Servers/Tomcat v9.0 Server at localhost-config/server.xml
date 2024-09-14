@@ -164,9 +164,7 @@
 
 	  <Context docBase="C:/upload" path="/photo"/>
 
-      
-      
-      <Context docBase="11_UserService" path="/11_UserService" reloadable="true" source="org.eclipse.jst.jee.server:11_UserService"/></Host>
+      <Context docBase="15_MemberJoin_" path="/15_MemberJoin" reloadable="true" source="org.eclipse.jst.jee.server:15_MemberJoin_"/></Host>
     </Engine>
   </Service>
 </Server>

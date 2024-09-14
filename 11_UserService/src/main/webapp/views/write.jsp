@@ -13,7 +13,7 @@
 <body>
 	<div class="login-wrapper">
 		<h2>Join</h2>
-		<form action="upload" method="post" id="login-Form">
+		<form action="upload" method="post" id="login-Form"  enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>ID</th>
@@ -31,6 +31,12 @@
 				<th>내용</th>
 				<td>
 					<input type="text" name="content" placeholder="작성.."/>
+				</td>
+			</tr>
+			<tr>
+				<th>이미지</th>
+				<td>
+					<input type="file" name="files" multiple/>
 				</td>
 			</tr>
 			<tr>

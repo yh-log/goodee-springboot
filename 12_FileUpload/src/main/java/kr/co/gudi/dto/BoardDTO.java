@@ -10,7 +10,6 @@ public class BoardDTO {
 	private String content;
 	private int bHit;
 	private Date reg_date;
-	
 	public int getIdx() {
 		return idx;
 	}
@@ -47,5 +46,5 @@ public class BoardDTO {
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
-
+	
 }

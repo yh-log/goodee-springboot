@@ -1,0 +1,38 @@
+<thml></thml>
+    <head>
+        <title>Ajax 방식으로 전송</title>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <h3> ajax 방식은 XML Http Request 객체가 받아서 전달하므로 기존 페이지를 덮어쓰지 않는다. (최대 장점)</h3>
+        <button onclick="ajaxCall('map')">map 형태로 받기</button>
+        <button onclick="ajaxCall('object')">object 형태로 받기</button>
+        <button onclick="ajaxCall('list')">list 형태로 받기</button>
+        <button onclick="ajaxCall('strMap')">문자열을 Map 형태로 받기</button>
+        <button onclick="ajaxCall('strObj')">문자열을 VO(DTO) 형태로 받기</button>
+    </body>
+    <script>
+        // Access to XMLHttpRequest... : 저런 녀석이 엑세스 하려고 했다.
+        // from origin 'null' has been blocked by CORS policy: -> CORS : cross domain site 
+        // No 'Access-Control-Allow-Origin'...
+
+
+
+        function ajaxCall(req){
+            $.ajax({ // 함수 넣고(ajax) 오브젝트 넣고{}
+                type: 'GET', // method
+                url: 'http://localhost:8080/14_RestAPI/'+req,
+                data:{}, // 파라미터 (아무것도 안넣고 있으니 그냥 둔다)
+                dataType: 'JSON', // 요청받을 데이터 타입
+                success: function(data){ // 성공했을 경우(받을 데이터)
+                    console.log(data);
+                },
+                error: function(e){ // 실패했을 때(실패 내용)
+                    console.log(e);
+                }
+
+            });
+        }
+    </script>
+</html>

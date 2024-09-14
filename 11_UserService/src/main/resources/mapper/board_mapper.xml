@@ -13,7 +13,8 @@
 	</select>
 	
 	<insert id="upload" parameterType="map">
-		INSERT INTO ubbs(user_name, subject, content)VALUES(#{user_name}, #{subject}, #{content})
+		INSERT INTO ubbs(user_name, subject, content)
+			VALUES(#{user_name}, #{subject}, #{content})
 	</insert>
 	
 	<delete id="boarddel">

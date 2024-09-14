@@ -6,6 +6,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +54,18 @@ public class BoardController {
 	public String detail(String idx ,Model model) {
 		boardService.detail(idx, model);
 		return "detail";
+	}
+	
+	@RequestMapping(value="del")
+	public String del(String idx) {
+		boardService.del(idx);
+		return "redirect:/list";
+	}
+	
+	@RequestMapping(value="/download")
+	public ResponseEntity<Resource> download(String new_filename, String ori_filename) {
+		logger.info(new_filename +":"  + ori_filename);
+		return boardService.download(new_filename, ori_filename);
 	}
 	
 }

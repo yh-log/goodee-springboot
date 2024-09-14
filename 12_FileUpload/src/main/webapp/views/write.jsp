@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-	<form action="write" method="post">
+	<form action="write" method="post" enctype="multipart/form-data">
 		<table>
 			<caption>글쓰기</caption>
 			<tr>
@@ -30,6 +30,12 @@
 				<th>내용</th>
 				<td>
 					<textarea name="content"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>이미지</th>
+				<td>
+					<input type="file" name="files" multiple/>
 				</td>
 			</tr>
 			<tr>

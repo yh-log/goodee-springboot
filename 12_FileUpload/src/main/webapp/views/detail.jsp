@@ -28,6 +28,18 @@
 				<th>세부내용</th>
 				<td>${info.content}</td>
 			</tr>
+			<c:if test="${files.size() > 0}">
+				<tr>
+					<th>이미지</th>
+					<td>
+						<c:forEach items="${files}" var="file">
+							<a href="download?new_filename=${file.new_filename}&ori_filename=${file.ori_filename}">
+							<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}"/>
+							</a>
+						</c:forEach>
+					</td>
+				</tr>
+			</c:if>
 			<tr>
 				<th>작성일</th>
 				<td>${info.reg_date}</td>

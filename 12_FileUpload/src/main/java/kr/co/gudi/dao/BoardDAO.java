@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.BoardDTO;
+import kr.co.gudi.dto.FileDTO;
 
 @Mapper
 public interface BoardDAO {
@@ -14,13 +16,17 @@ public interface BoardDAO {
 
 	BoardDTO detail(int idx);
 
-	boolean write(Map<String, String> params);
+	int write(BoardDTO dto);
 
-	void del(int idx);
+	int del(int idx);
 
 	void upHit(int idx);
 
 	int update(Map<String, String> params);
+
+	void filewrite(int idx, String ori_filename, String new_filename);
+
+	List<FileDTO> files(int idx);
 
 	
 

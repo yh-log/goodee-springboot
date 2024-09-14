@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>List</h2>
-	<button onclick='location.href="write"'>글쓰기</button>
+	<button onclick='location.href="writeForm"'>글쓰기</button>
 	<div class='container'>
 	<table>
 		<thead>
