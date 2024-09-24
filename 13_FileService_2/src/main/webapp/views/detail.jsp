@@ -37,7 +37,7 @@
 				<!-- <Context docBase="C:/upload" path="/photo" />  -->
 				<c:forEach items="${files}" var="file">
 					<a href="download.do?new_filename=${file.new_filename}&ori_filename=${file.ori_filename}">
-						<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}">											
+						<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}"></br>										
 					</a>
 					<br/>
 				</c:forEach>				

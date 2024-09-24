@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.mapper.BoardMapper">
+
+	<select id="list" resultType="kr.co.gudi.vo.BoardVO">
+		SELECT idx,subject,user_name,bHit,reg_date FROM bbs ORDER BY idx DESC
+			LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="allCount">
+		SELECT CEIL(COUNT(idx)/#{param1}) AS pages FROM bbs
+	</select>
+	
+</mapper>

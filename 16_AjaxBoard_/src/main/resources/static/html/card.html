@@ -1,0 +1,38 @@
+<div id="career_card">
+	<table>
+		<tr>
+			<th>이름</th>
+			<td><input type="text" name="name" value=""/></td>
+			<th>성별</th>
+			<td>
+				<input type="radio" name="gender" value="남"/>남
+				&nbsp;&nbsp;
+				<input type="radio" name="gender" value="여"/>여				
+			</td>
+			<th rowspan="2">
+				<input type="button" class="row2" value="등록" onclick="regiest()"/>
+			</th>
+		</tr>
+		<tr>
+			<th>생년월일</th>
+			<td><input type="date" name="birth_date" value=""/></td>
+			<th>입사일</th>
+			<td><input type="date" name="hire_date" value=""/></td>
+		</tr>
+	</table>
+	
+	<div class="career">경력 사항</div> <!-- 배열로 들어가고 배열 안에 아래 내용이 들어가야 한다. -->
+	<div>
+		<ul class="career">
+			<li>
+				<input type="text" name="co_name" placeholder="회사명"/>
+				<input type="date" name="start_date"/>
+				<input type="date" name="end_date"/>
+				<input type="text" name="desc" placeholder="업무내용"/>
+				<button onclick="addList(this)">추가</button> <!-- 추가를 누르면 아래 동일한 내용이 복사되도록! -->
+			</li>
+		</ul>
+	</div>
+</div>
+
+

@@ -106,9 +106,6 @@ public class BoardSedrvice {
 				}
 			}
 		}
-		
-		
-		
 	}
 
 	public ResponseEntity<Resource> download(String new_filename, String ori_filename) {
