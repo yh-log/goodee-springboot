@@ -113,5 +113,29 @@ public class BoardController {
 		return result;
 	}
 	
+	@PostMapping(value="/filedelete.ajax")
+	@ResponseBody
+	public Map<String, Object> filedelete(MultipartFile[] files){
+		
+		boolean success = false;
+		
+		
+		for (MultipartFile file : files) {
+			logger.info("삭제 요청한 file :" + file.getOriginalFilename());
+		}
+		
+		int row = 0;
+				//ser.filedelete(files);
+		
+		if(row > 0) {
+			success = true;
+		}
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("result", success);
+		
+		return result;
+	}
+	
 	
 }

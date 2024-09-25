@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+	table, th, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+	input[type="text"]{
+		width: 100px;
+		background-color: lightgray;
+	}
+	input[name="project_name"]{
+		width: 300px;
+	}
+</style>
+</head>
+<body>
+	<h3>조별 명단 및 프로젝트</h3>
+	<hr/>
+	<table>
+		<thead>
+			<tr>
+				<th>no</th>
+				<th>팀이름</th>
+				<th>팀장</th>
+				<th>팀원1</th>
+				<th>팀원2</th>
+				<th>팀원3</th>
+				<th>팀원4</th>
+				<th>프로젝트 주제</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+		
+		</tbody>
+	</table>
+</body>
+<script>
+
+	listCall();	
+
+	function listCall(){
+		$.ajax({
+			type: 'GET',
+			url: 'list.ajax',
+			data: {},
+			dataType: 'JSON',
+			success: function(data){
+				console.log(data);
+				console.log(data.list);
+				printList(data.list);
+			},error: function(e){
+				console.log(e);
+			}
+		})
+	}
+	
+	function printList(list){
+		var content = '';
+		
+		// list : 배열 형태로 가져오고 = foreach, $(list): 객체 형식으로 가져온다. = each (객체로 가져오면 for in 사용 가능)
+		
+		list.forEach(function(item,idx){
+			content += '<tr>';
+			content += '<td id="no">'+item.no+'</td>';
+			content += '<td><input type="text" name="team_name" value="'+item.team_name+'"/></td>';
+			content += '<td><input type="text" name="leader" value="'+item.leader+'"/></td>';
+			content += '<td><input type="text" name="staff1" value="'+item.staff1+'"/></td>';
+			content += '<td><input type="text" name="staff2" value="'+item.staff2+'"/></td>';
+			content += '<td><input type="text" name="staff3" value="'+item.staff3+'"/></td>';
+			content += '<td><input type="text" name="staff4" value="'+item.staff4+'"/></td>';
+			content += '<td><input type="text" name="project_name" value="'+item.project_name+'"/></td>';
+			content += '</tr>';
+		})
+		
+		$('#list').html(content);
+		
+		// body에 걸어주거나, 태그에 이벤트를 적어주거나, html이 찍이고 나서 실행하거나 중 택 1
+		// printList 밖에 이벤트를 걸면 먹히지 않는다. -> 
+		$('input[type="text"]').focusin(function(e){
+			$(this).css({'background-color':'white'});
+/* 			console.log(this);
+			console.log(e); */
+		});
+		$('input[type="text"]').focusout(function(e){
+			$(this).css({'background-color':'lightgray'});
+			// 빠져나갔을 때 변경된 값이 있으면 요청
+			// $(this) == e.currentTarget -> 이벤트 객체로 확인하면 볼 수 있다. 제너릭을 쓰면 this를 못쓰니까 이벤트 객체(e.currentTarget)로 사용해줘야 한다.
+			console.log(e);
+			if(e.currentTarget.defaultValue != e.currentTarget.value){
+				console.log('수정요청');
+				
+			// 컬럼명, 해당값, 번호 (추출해서 서버에 보내줘야 함)
+			//	$(this).siblings('#no').val();
+			//	console.log($('tr').siblings('#no').html());
+			//	$('tr').next().html();
+			
+				// $(this).parents('tr').text()
+			//	$(this).closest('tr').find('#no').text(); // tr 요소의 값을 가져옴
+			
+			// $(this).parents('#no').text(); // 안가져옴!
+			
+			//console.log($(this).parents('tr').text());
+			
+				var col = $(this).attr('name'); // 바뀐 값의 이름 (컬럼명) 
+				var val = $(this).val(); // 바뀐 값 (데이터)
+				var no = $(this).closest('tr').find('td').eq(0).html(); // no (eq 말고 first 사용해도 됨)
+				
+				console.log(col, val, no);
+				location.href= 'update/'+col+'/'+val+'/'+no+'.ajax';
+			}
+		});
+	}
+	
+/* 	function updateReq(col,val,no){
+		var url = 'update.ajsx/'+col+'/'+val+'/'+no;
+	}
+ */
+</script>
+</html>

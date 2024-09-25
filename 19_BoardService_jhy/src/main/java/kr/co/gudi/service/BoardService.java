@@ -144,7 +144,6 @@ public class BoardService {
 		String idx = param.get("idx");
 		
 		logger.info("idx : " + idx);
-		
 		logger.info("insert row : " + row);
 				
 		List<FilesDTO> file_dto =  dao.files(idx);

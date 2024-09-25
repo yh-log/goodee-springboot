@@ -105,7 +105,7 @@
 				career[$(elem).attr('name')] = $(elem).val();
 			});
 		//	console.log(career);
-			3
+			
 		});
 		console.log(list);
 		

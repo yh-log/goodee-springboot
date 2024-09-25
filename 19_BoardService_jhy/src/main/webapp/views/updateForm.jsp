@@ -45,7 +45,9 @@
 				<td>
 				<!-- /photo라는 context요청이 있으면 C:/upload로 연결하도록 설정되어야 함(server.xml) -->
 					<c:forEach items="${files}" var="file">
-						<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}" onclick="download('${file.new_filename}')"><br/>						
+					<span onclick="fileDelete(this)">	
+						<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}" onclick="download('${file.new_filename}')">
+					</span><br/>						
 					</c:forEach>
 				</td>
 			</tr>
@@ -109,6 +111,27 @@
 			$('#img_list').append('<img class="preview" src="'+e.target.result+'"/>');
 			}
 		}
+	}
+	
+	
+	function fileDelete(file){
+		$.ajax({
+			type: 'POST',
+			url: 'filedelete.ajax',
+			enctype:'multipart/form-data',
+			processData:false,
+			contentType:false,
+			data: {'file' : file},
+			dataType: 'JSON',
+			success: function(data){
+				console.log(data);
+				if(data.result){
+					alert('삭제되었습니다.');
+				}
+			},error: function(e){
+				console.log(e);
+			}
+		})
 	}
 
 </script>

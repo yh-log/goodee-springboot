@@ -1,6 +1,7 @@
 package kr.co.gudi.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -28,7 +29,7 @@ public interface BoardDAO {
 
 	String getFileName(String fileName);
 
-	int updateajax(BoardDTO dto);
+	int updateajax(Map<String, String> param);
 
 	
 }

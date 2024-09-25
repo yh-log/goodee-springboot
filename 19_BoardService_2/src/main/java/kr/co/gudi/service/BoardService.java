@@ -131,13 +131,9 @@ public class BoardService {
 	}
 
 	public int updateajax(Map<String, String> param, MultipartFile[] files) {
-		BoardDTO dto = new BoardDTO();
-		dto.setUser_name(param.get("user_name"));
-		dto.setSubject(param.get("subject"));
-		dto.setContent(param.get("content"));
-		dto.setIdx(Integer.parseInt(param.get("idx")));
-		int row = dao.updateajax(dto);
-		int idx = dto.getIdx();
+
+		int row = dao.updateajax(param);
+		int idx = Integer.parseInt(param.get("idx"));
 		logger.info("받아온 idx 값 : "+idx);
 		if (row > 0 && idx > 0) {
 			saveFile(files,idx);

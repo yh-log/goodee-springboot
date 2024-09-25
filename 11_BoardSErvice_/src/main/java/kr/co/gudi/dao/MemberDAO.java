@@ -10,7 +10,4 @@ public interface MemberDAO {
 	int join(Map<String, String> param);
 
 	String login(String id, String pw);
-
-	
-	
 }

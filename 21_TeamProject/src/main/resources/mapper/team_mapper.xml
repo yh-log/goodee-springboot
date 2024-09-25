@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.mapper.TeamMapper">
+
+	<select id="list" resultType="kr.co.gudi.vo.TeamVO">
+		SELECT * FROM team_project
+	</select>
+	
+<!-- 	<update id="update" parameterType="map">
+		UPDATE team_project
+		<set>
+			<if test="col != null and col.equals('team_name')">
+				team_name = #{val},
+			</if>
+			<if test="col != null and col.equals('leader')">
+				leader = #{val},
+			</if>
+			<if test="col != null and col.equals('staff1')">
+				staff1 = #{val},
+			</if>
+			<if test="col != null and col.equals('staff2')">
+				staff2 = #{val},
+			</if>
+			<if test="col != null and col.equals('staff3')">
+				staff3 = #{val},
+			</if>
+			<if test="col != null and col.equals('staff4')">
+				staff4 = #{val},
+			</if>
+			<if test="col != null and col.equals('project_name')">
+				project_name = #{val}
+			</if>
+		</set>
+		WHERE no = #{no}
+	</update>
+ -->
+ 	<!-- 'team_name' = '1조' WHERE no = '1'
+ 			이런 에러가 발생하는데, 컬럼명이 아닌 문자열이 되어서 그럼 (''로 감싸주니까)
+ 			그래서 # 아닌 $ 을 사용해주면 문자열로 취급을 안한다.
+ 	-->
+ 	<update id="update" parameterType="map">
+ 		UPDATE team_project SET ${col} = #{val} WHERE no = #{no}
+ 	</update>
+ 	<!-- 권고하지 않는 방식이다. 차라리 if문을 다 사용해주는 것이 좋다. 
+ 		 셀렉트는 내가 보여주고 싶은 컬럼만 보여주겠다는 것인데, 컬럼은 사용자가 강제할 수 있지만 
+ 		 변수에 담아오면 사용자가 보고싶은 컬럼을 지정해버리면 되기 때문에...
+ 		 (ex. 누군가가 규칙성을 발견해서 저 컬럼명을 바꾸면 개인 정보를 다 볼 수 있다 => 보안x)
+ 		 그래서 컬럼에 모든 내용을 봐도 괜찮을 때에는 사용해도 된다.
+ 		 만약 한번 들어온 값을 수정 못하게 막으려면 if문은 그 해당 if문을 없애버리면 되지만 이 방식은 그렇게 막을 수 있는 방법이 없다.
+ 	-->
+</mapper>

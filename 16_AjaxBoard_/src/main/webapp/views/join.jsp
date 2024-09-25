@@ -62,7 +62,7 @@
 	var overlayPass = false;
 
 	function join(){
-		if(overlayPass){
+		if(overlayPass == true && pwPass == true){
 		console.log('서버에 회원가입 요청');
 		$('form').submit(); // form을 서버로 던지는 submit 역할을 해주는 함수!
 		}else{

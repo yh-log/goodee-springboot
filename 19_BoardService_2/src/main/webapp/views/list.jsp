@@ -90,6 +90,7 @@ $('#pagePerNum').change(function(){
 			}
 		});
 	}
+	
 	function drawList(list) {
 		var content ='';
 		list.forEach(function(view,idx){ 

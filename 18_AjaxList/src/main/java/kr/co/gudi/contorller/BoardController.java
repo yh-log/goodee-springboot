@@ -27,11 +27,11 @@ public class BoardController {
 		return "list";
 	}
 	
-	@GetMapping(value="/list.ajax")
-	@ResponseBody
-	public List<BoardVO> list() {
-		List<BoardVO> list = boardService.list();
-		return list;
-	}
+//	@GetMapping(value="/list.ajax")
+//	@ResponseBody
+//	public List<BoardVO> list() {
+//		List<BoardVO> list = boardService.list();
+//		return list;
+//	}
 	
 }

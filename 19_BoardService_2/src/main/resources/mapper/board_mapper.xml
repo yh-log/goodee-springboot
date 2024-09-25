@@ -54,7 +54,7 @@
 			WHERE new_filename = #{param1}
 	</select>
 	
-	<update id="updateajax" parameterType="kr.co.gudi.dto.BoardDTO">
+	<update id="updateajax" parameterType="map">
 		UPDATE bbs SET user_name = #{user_name}, subject = #{subject}, content = #{content} WHERE idx = #{idx}
 	</update>
 

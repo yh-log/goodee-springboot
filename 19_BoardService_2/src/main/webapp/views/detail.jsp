@@ -34,7 +34,7 @@
 				<td>
 				<!-- /photo라는 context요청이 있으면 C:/upload로 연결하도록 설정되어야 함(server.xml) -->
 					<c:forEach items="${files}" var="file">
-						<img alt="${file.ori_filename}" src="/photo/${file.new_filename}" onclick="download('${file.new_filename}')"><br/>						
+						<img width="500" alt="${file.ori_filename}" src="/photo/${file.new_filename}" onclick="download('${file.new_filename}')"><br/>						
 					</c:forEach>
 				</td>
 			</tr>

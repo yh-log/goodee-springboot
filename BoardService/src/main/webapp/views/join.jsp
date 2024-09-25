@@ -16,7 +16,7 @@
 			<input type="text" name="id" placeholder="Id"/> 
 			<button type="button" id="overlay">중복체크</button>
 			<span id="result"></span>
-			<input type="password" name="pw" placeholder="Password"/>	
+			<input type="password" name="pw" placeholder="Password"/>
 			<input type="text" name="name" placeholder="Name"/>
 			<input type="text" name="age" placeholder="Age"/>
             <label for="remember-check">
@@ -26,6 +26,7 @@
             </label>
 			<input type="email" name="email" placeholder="Email"/>
 			<input type="submit" value="Join"/>
+			
 		</form>
 	</div>
 </body>
