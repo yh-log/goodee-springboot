@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.gudi.dao.Boarddao">
+	
+	
+	
+	<select id="list" resultType="kr.co.gudi.dto.Bbsdto">
+		SELECT * FROM bbs ORDER BY idx DESC
+	</select>
+	
+	<select id="files" resultType="kr.co.gudi.dto.Filedto">
+		SELECT * FROM files where idx =#{param1}
+	</select>
+	
+	<!--  
+	<select id="allCount" resultType="int"> 
+		select ceil(count(idx)/#{param1}) as pages from bbs
+	</select>
+	-->
+	<insert id="write"
+	useGeneratedKeys="true"
+	keyColumn="idx"
+	keyProperty="idx"
+	 parameterType="kr.co.gudi.dto.Bbsdto">
+		insert into bbs (user_name,subject,content)
+			values(#{user_name},#{subject},#{content})
+	</insert>
+	
+	<delete id="b_del">
+		delete from bbs where idx = #{param1}
+	</delete>
+	
+	<select id="b_detail" resultType="kr.co.gudi.dto.Bbsdto">
+		SELECT * FROM bbs where idx = #{param1}
+	</select>
+	
+	<insert id="fileWrite">
+		insert into files (idx,ori_filename,new_filename)
+			values(#{param1},#{param2},#{param3})
+	</insert>
+	
+	<select id="getfilename" resultType="String">
+		select ori_filename from files where new_filename = #{param1}
+	</select>
+	
+	<update id="bHit">
+		update bbs set bHit = bHit + 1 where idx=#{param1}
+	</update>
+	
+	<update id="update" parameterType="map">
+		UPDATE bbs SET
+			subject = #{subject},
+			content = #{content}
+		WHERE idx = #{idx}
+	</update>
+	
+</mapper>

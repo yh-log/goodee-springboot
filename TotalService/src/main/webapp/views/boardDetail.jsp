@@ -24,11 +24,11 @@ textarea{
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="subject" value="${result.subject}"/></td>
+			<td><input type="text" name="subject" value="${result.subject}" readonly/></td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><textarea name="content">${result.content}</textarea></td>
+			<td><textarea name="content" readonly>${result.content}</textarea></td>
 		</tr>
 
 		<c:if test="${files.size()>0}">
@@ -49,6 +49,7 @@ textarea{
 				<th colspan="2">
 					<button onclick="update()">수정하기</button>
 					<button onclick="list()">리스트</button>
+					<button onclick="boardDelete()" id="boardDel">삭제</button>
 				</th>
 			</tr>
 			
@@ -56,11 +57,24 @@ textarea{
 </body>
 <script>
 	function update(){
-		location.href='/TotalService/updateView/'+'${result.idx}';
+		location.href='update.go?idx='+${result.idx};
+			//'/TotalService/updateView/'+'${result.idx}';
 	}
 	
 	function list(){
 		location.href= '/TotalService/boardListView';
+	}
+	
+	var opt = '${sessionScope.opt}';
+	
+	if (opt === 'admin') {
+        $('#boardDel').css({'display': 'inline-block'});
+    } else {
+        $('#boardDel').css({'display': 'none'});
+    }
+	
+	function boardDelete(){
+		location.href='boarddelete.go?idx='+${result.idx};
 	}
 </script>
 </html>

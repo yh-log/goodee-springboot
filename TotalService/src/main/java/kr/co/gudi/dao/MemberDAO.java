@@ -1,6 +1,7 @@
 package kr.co.gudi.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +21,9 @@ public interface MemberDAO {
 	List<MemberDTO> memberList(int limit, int offset);
 
 	MemberDTO memberDetail(String id);
+
+	int update(Map<String, String> param);
+
+	int delete(String id);
 
 }

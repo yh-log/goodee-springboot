@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-	<h2>게시글 상세보기</h2>
+	<h2>게시글 수정하기</h2>
 	<form action="boardUpdate" method="post" enctype="multipart/form-data">
 		<input type="number" name="idx" value="${result.idx}" hidden/>
 		<table>

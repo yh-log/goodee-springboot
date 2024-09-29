@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.gudi.dao.Maindao">
+	
+	<select id="login" resultType="String" parameterType="map">
+		SELECT id FROM member WHERE id = #{id} AND pw = #{pw}
+	</select>
+
+	<insert id="join" parameterType="String">
+		INSERT INTO member (id,pw,name,age,gender,email)
+			VALUES(#{id},#{pw},#{name},#{age},#{gender},#{email})
+	</insert>
+
+	<select id="check" resultType="int">
+		SELECT COUNT(id) FROM member WHERE id = #{param1}
+	</select>
+
+	<select id="u_list" resultType="kr.co.gudi.dto.Maindto">
+		SELECT * FROM member limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="u_detail" resultType="kr.co.gudi.dto.Maindto">
+		SELECT * FROM member where id =#{param1}
+	</select>
+	
+	<select id="allCount" resultType="int"> 
+		select ceil(count(id)/#{param1}) as pages from member
+	</select>
+	
+	<delete id="u_del">
+		delete from member where id =#{param1}
+	</delete>
+	
+	<update id="update" parameterType="map">
+		UPDATE member SET 
+			pw=#{pw}, name=#{name}, age=#{age}, gender=#{gender}, email=#{email} 
+			WHERE id = #{id}
+	</update>
+	
+	
+</mapper>

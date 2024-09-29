@@ -1,18 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<title>Board Detail</title>
+<link rel="stylesheet" href="resources/css/common.css" type="text/css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 
-	table, th, td{
-		border : 1px solid white;
-		border-collapse : collapse;
-		padding: 5px 10px;
-		}
 </style>
 </head>
 <body>
@@ -52,6 +47,8 @@
 			<tr>
 				<th colspan="2">
 					<a href="./memberListView"> 리스트</a>
+					<a href="memberUpdate.go?id=${info.id}">수정</a>
+					<a href="delete.go?id=${info.id}">삭제</a>
 				</th>
 			</tr>
 		</table>

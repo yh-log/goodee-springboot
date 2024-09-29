@@ -29,4 +29,12 @@
 		SELECT * FROM member WHERE id = #{param1}
 	</select>
 	
+	<update id="update" parameterType="map">
+		UPDATE member SET pw=#{pw}, name=#{name}, age=#{age}, gender=#{gender}, email=#{email} WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM member WHERE id = #{id}
+	</delete>
+	
 </mapper>

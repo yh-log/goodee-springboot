@@ -18,7 +18,7 @@
 	<h2>게시글</h2>
 	
 	<button type="button" onclick="writeView()">글쓰기</button>
-	<button type="button" onclick="memberList()">회원정보</button>
+	<button type="button" id="memberList" onclick="memberList()">회원정보</button>
 	
 	<select id="pageNum">
 		<option value="5">5</option>
@@ -94,13 +94,15 @@
 		});
 	}
 	
+	// ' + '${pageContext.request.contextPath}'+'/boardDetail/'+item.idx+'">'
+	
 	function printList(list){
 		var content = '';
 		
 		list.forEach(function(item, idx){
 			content += '<tr>';
 			content += '<td>'+item.idx+'</td>';
-			content += '<td><a href="' + '${pageContext.request.contextPath}'+'/boardDetail/'+item.idx+'">'+item.subject+'</a></td>';
+			content += '<td><a href="boardDetail.go?idx='+item.idx+'">'+item.subject+'</a></td>';
 			content += '<td>'+item.user_name+'</td>';
 			content += '<td>'+item.bHit+'</td>';
 			content += '<td>'+item.reg_date+'</td>';
@@ -112,7 +114,16 @@
 	function memberList(){
 		location.href='/TotalService/memberListView';
 	}
+	
+	// JSP에서 세션에 저장된 'opt' 값을 가져와 JavaScript 변수에 저장
+	var opt = '${sessionScope.opt}';
 
+	// opt가 'admin'일 때만 '회원정보' 버튼을 보이게 하고, 아닐 경우 숨김
+	if (opt === 'admin') {
+        $('#memberList').css({'display': 'inline-block'});
+    } else {
+        $('#memberList').css({'display': 'none'});
+    }
 </script>
 
 </html>

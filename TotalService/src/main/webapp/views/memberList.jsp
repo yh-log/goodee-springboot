@@ -21,7 +21,7 @@
 </head>
 <body>
 	<h2>Member List</h2>
-	<a>게시글 리스트</a>
+	<a href="./boardListView">게시글 리스트</a>
 	<select id="pageNum">
 		<option value="5">5</option>
 		<option value="10">10</option>
@@ -94,7 +94,7 @@
 		
 		list.forEach(function(item, idx){
 			content += '<tr>';
-			content += '<td><a href="' + '${pageContext.request.contextPath}'+'/memberDetail/'+item.id+'">'+item.id+'</a></td>';
+			content += '<td><a href="memberDetail.go?id='+item.id+'">'+item.id+'</a></td>';
 			content += '<td>'+item.name+'</td>';
 			content += '<td>'+item.email+'</td>';
 			content += '</tr>'

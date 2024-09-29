@@ -58,6 +58,10 @@
 		UPDATE bbs SET user_name = #{user_name}, subject = #{subject}, content = #{content} WHERE idx = #{idx}
 	</update>
 
+	<select id="allCount" resultType="int">
+		SELECT COUNT(idx) FROM bbs
+	</select>
+
 </mapper>
 
 

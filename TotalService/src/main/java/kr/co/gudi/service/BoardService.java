@@ -125,5 +125,27 @@ public class BoardService {
 		return new ResponseEntity<Resource>(res, header, HttpStatus.OK);
 	}
 
+	public Object boardUpdate(Map<String, Object> param, MultipartFile[] files) {
+		
+		int row = board_dao.boardUpdate(param);
+		String idxStr = String.valueOf(param.get("idx"));
+		int idx = Integer.parseInt(idxStr);
+		
+		logger.info("받아온 idx : "+ idx);
+		if(row>0 && idx>0) {
+			if(files != null) {
+				filesava(idx, files);
+			}
+		}
+		
+		
+		return idx;
+	}
+
+	public void boarddelete(int idx) {
+		int row = board_dao.boarddelete(idx);
+		logger.info("delete : "+row);
+	}
+
 
 }

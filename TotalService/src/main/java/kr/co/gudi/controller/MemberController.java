@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.gudi.dto.MemberDTO;
@@ -108,12 +109,56 @@ public class MemberController {
 		return member_service.memberList(page,cnt);
 	}
 	
-	@RequestMapping(value="/memberDetail/{id}")
-	public String memberDetail(@PathVariable("id") String id, Model model) {
+	@RequestMapping(value="/memberDetail.go")
+	public String memberDetail(String id, Model model, HttpSession session) {
+		
+		if(!session.getAttribute("opt").equals("admin")) {
+			return "redirect:/";
+		}
 		
 		model.addAttribute("info", member_service.memberDetail(id));
 		
 		return "memberDetail";
+	}
+	
+	@RequestMapping(value="/memberUpdate.go")
+	public String memberUpdate(String id, Model model, HttpSession session) {
+		
+		if(!session.getAttribute("opt").equals("admin")) {
+			return "redirect:/";
+		}
+		
+		model.addAttribute("info", member_service.memberDetail(id));
+		
+		return "memberUpdate";
+	}
+	
+	@PostMapping(value="/memberUpdate.do")
+	public String update(@RequestParam Map<String, String> param, HttpSession session) {
+		logger.info("params : {}", param);
+		
+		if(!session.getAttribute("opt").equals("admin")) {
+			return "redirect:/";
+		}
+		
+		
+		member_service.update(param);
+		return "redirect:/memberDetail.go?id=" + param.get("id");
+		
+	}
+	
+	@RequestMapping(value="delete.go")
+	public String delete(String id, HttpSession session) {
+		
+		if(!session.getAttribute("opt").equals("admin")) {
+			return "redirect:/";
+		}
+		
+		logger.info("id: " + id);
+		
+		member_service.delete(id);
+		
+		return "memberList";
 	}
 	
 	

@@ -31,5 +31,7 @@ public interface BoardDAO {
 
 	int updateajax(Map<String, String> param);
 
+	int allCount();
+
 	
 }

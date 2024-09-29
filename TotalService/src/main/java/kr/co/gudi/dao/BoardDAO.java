@@ -1,6 +1,7 @@
 package kr.co.gudi.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,6 +24,10 @@ public interface BoardDAO {
 	BoardDTO boardDetail(int idx);
 
 	List<FileDTO> files(int idx);
+
+	int boardUpdate(Map<String, Object> param);
+
+	int boarddelete(int idx);
 
 
 }

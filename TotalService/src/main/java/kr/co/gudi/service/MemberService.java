@@ -76,5 +76,16 @@ public class MemberService {
 		
 		return dto;
 	}
+
+	public void update(Map<String, String> param) {
+		int row = member_dao.update(param);
+		logger.info("update row : " + row);
+		
+	}
+
+	public void delete(String id) {
+		int row = member_dao.delete(id);
+		logger.info("row : " + row);
+	}
 	
 }
