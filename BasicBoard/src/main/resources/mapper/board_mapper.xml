@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.BoardDAO">
+
+	<select id="totalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(idx)/#{limit}) FROM board
+	</select>
+	
+	<select id="boardList" resultType="kr.co.gudi.dto.BoardDTO">
+		SELECT idx, subject, user_name, bHit, reg_date FROM board WHERE bbs_yn = 'Y' ORDER BY idx DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<insert 
+		useGeneratedKeys="true"
+		keyColumn="idx"
+		keyProperty="idx"
+	id="write" parameterType="kr.co.gudi.dto.BoardDTO">
+		INSERT INTO board(user_name, subject, content) 
+			VALUES(#{user_name}, #{subject}, #{content})
+	</insert>
+
+	<insert id="fileWrite">
+		INSERT INTO file(idx, ori_filename, new_filename, type)
+			VALUES(#{param1}, #{param2}, #{param3}, #{param4})
+	</insert>
+	
+	<update id="bHitUp" parameterType="int">
+		UPDATE board SET bHit = bHit + 1 WHERE idx = #{idx}
+	</update>
+	
+	<select id="boardDetail" resultType="kr.co.gudi.dto.BoardDTO" parameterType="int">
+		SELECT * FROM board WHERE idx = #{idx}
+	</select>
+	
+	<select id="fileDetail" resultType="kr.co.gudi.dto.FileDTO" parameterType="int">
+		SELECT * FROM file WHERE idx = #{idx} AND file_yn = 'Y'
+	</select>
+	
+	<insert id="addComment" parameterType="kr.co.gudi.dto.CommentDTO">
+		INSERT INTO comment(board_idx, member_id, comment) VALUES(#{board_idx}, #{member_id}, #{comment})
+	</insert>
+	
+	<select id="commentList" resultType="kr.co.gudi.dto.CommentDTO" parameterType="kr.co.gudi.dto.CommentDTO">
+		SELECT member_id, comment, reg_date FROM comment WHERE board_idx = #{board_idx}
+	</select>
+	
+	<update id="deleteFile" parameterType="kr.co.gudi.dto.FileDTO">
+		UPDATE file SET file_yn = 'N' WHERE new_filename = #{new_filename}
+	</update>
+	
+	<update id="boardUpdate" parameterType="kr.co.gudi.dto.BoardDTO">
+		UPDATE board SET 
+			user_name = #{user_name}, subject = #{subject}, content = #{content}, update_date = CURRENT_DATE
+			WHERE idx = #{idx}
+	</update>
+	
+	<update id="delete" parameterType="int">
+		UPDATE board SET bbs_yn = 'N' WHERE idx = #{idx}
+	</update>
+
+</mapper>
