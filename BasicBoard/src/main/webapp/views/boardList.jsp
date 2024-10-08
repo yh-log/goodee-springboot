@@ -17,6 +17,8 @@
 </head>
 <body>
 	<h3>게시판</h3>
+	<h1>${sessionScope.loginId}</h1>
+	<button style="float: right; width : 100px; height : 50px" id="authButton" onclick="authClick()">로그인</button>
 	<select id="pageNumber">
 		<option value="5">5</option>
 		<option value="10">10</option>
@@ -113,5 +115,40 @@
 		})
 		$('#list').html(content);
 	}
+	
+	
+	// 페이지 로드 시 로그인 상태 체크
+	var loginId = "${sessionScope.loginId}";  // 세션에서 loginId 값을 가져옴
+	console.log(loginId);
+
+	// null이 아니고 공백이 아닐 경우 true
+	var isLogin = loginId != null && loginId !== "";  // 로그인 상태 확인
+
+	if (isLogin) {
+	    $('#authButton').text('로그아웃');
+	} else {
+	    $('#authButton').text('로그인');
+	}
+	
+ 	
+	if(isLogin){ // 로그인 한 상태일 경우
+		$('#authButton').text('로그아웃');
+	}
+	
+	function authClick() {
+	    if (isLogin) {
+	        // 로그아웃 버튼을 누르면 로그아웃 URL로 이동
+	        location.href = "/logout";
+	        
+	    } else {
+	        // 로그인 페이지로 이동
+	        location.href = "/loginView";
+	    }
+	}
+
+	
+
+	
+	
 </script>
 </html>

@@ -36,11 +36,17 @@ public class BoardController {
 	
 	@GetMapping(value="/boardList")
 	@ResponseBody
-	public Map<String, Object> boardList(int page, int cnt, HttpSession session){
+	public Map<String, Object> boardList(Integer page, Integer cnt, HttpSession session){
 //		Map<String, Object> resultMap = board_service.boardList(page, cnt);
 		
 		logger.info("page : "+page);
 		logger.info("cnt : "+cnt);
+		
+		if(page == null) {
+			page = 1;
+			cnt = 20;
+		}
+		
 		
 		return board_service.boardList(page, cnt);
 	}

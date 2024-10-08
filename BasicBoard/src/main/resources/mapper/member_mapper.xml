@@ -5,4 +5,8 @@
 
 <mapper namespace="kr.co.gudi.dao.MemberDAO">
 
+	<select id="login" resultType="int" parameterType="kr.co.gudi.dto.MemberDTO">
+		SELECT COUNT(id) FROM bdmember WHERE id = #{id} AND pw = #{pw}
+	</select>
+
 </mapper>

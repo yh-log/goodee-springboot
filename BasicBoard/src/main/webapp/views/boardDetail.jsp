@@ -13,8 +13,8 @@
 </head>
 <body>
 	<h3>상세 보기</h3>
-	<a href="/updateView/${detail.idx}"><button>수정</button></a>
-	<a href="/delete/${detail.idx}"><button>삭제</button></a>
+	<a href="/updateView/${detail.idx}"><button class="hid">수정</button></a>
+	<a href="/delete/${detail.idx}"><button class="hid">삭제</button></a>
 	<div>
 		<table>
 			<tr>
@@ -59,12 +59,16 @@
 				<thead id="commentList"></thead>
 				<tr>
 					<th>댓글작성</th>
-					<td><input type="text" name="member_id"/></td>
-					<td><input type="text" name="comment"/><button type="button" onclick="commentSave()">작성</button></td>
+					<td><input type="text" name="member_id" value="${sessionScope.loginId}" readonly="readonly"/></td>
+					<td><input type="text" name="comment"/><button type="button" id="commentBtn" onclick="commentSave()">작성</button></td>
 				</tr>
 			</table>
 		</form>
-		<span><button type="button" onclick="likes()">좋아요</button></span>
+		<span>
+			<img src="/img/likeFalse.png" width="20px" id="likeImg"/>
+			<button type="button" onclick="likes()" id="likeBtn">좋아요</button>
+			<span id="likeNum"></span>
+		</span>
 	</div>
 </body>
 <script>
@@ -74,7 +78,7 @@
 
 	function commentSave(){
 		
-		var member_id = $('input[name="member_id"]').val(); // ${sessionScope.loginId}
+		var member_id = "${sessionScope.loginId}"; // ${sessionScope.loginId}
 		var comment = $('input[name="comment"]').val();
 		var board_idx = ${detail.idx};
 		
@@ -95,7 +99,6 @@
 				commentList();
 				
 				// 댓글 작성 후 입력 필드 초기화
-				$('input[name="member_id"]').val('');
 				$('input[name="comment"]').val('');
 				
 			},error: function(e){
@@ -136,6 +139,32 @@
 		})
 		$('#commentList').html(content);
 	}
+	
+	
+	var loginId = "${sessionScope.loginId}";  // 세션 값을 가져옴
+
+	// loginId가 null이거나 빈 문자열일 경우
+	if (loginId == null || loginId == '') {
+	    // input 태그를 disabled 상태로 설정
+	    $('input[name="member_id"]').attr('disabled', true);
+	    $('input[name="comment"]').attr('disabled', true);
+	    $('#commentBtn').attr('disabled', true);
+	    $('#likeBtn').attr('disabled', true);
+	    
+	    $('.hid').attr('hidden', true);
+	    
+	}
+	
+	
+	function likes(){
+		$('#likeImg').attr('src', '/img/likeTrue.png');
+		
+		//좋아요가 눌릴 경우 +1 (또 눌릴 경우 빼는건 나중에)
+		
+		
+		
+	}
+	
 
 </script>
 </html>
