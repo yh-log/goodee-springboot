@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.transform.Source;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.gudi.dto.BoardDTO;
+import kr.co.gudi.dto.BoardVO;
 import kr.co.gudi.dto.CommentDTO;
 import kr.co.gudi.dto.FileDTO;
+import kr.co.gudi.dto.LikesDTO;
 import kr.co.gudi.service.BoardService;
 
 @Controller
@@ -183,6 +183,15 @@ public class BoardController {
 		board_service.delete(idx);
 		
 		return "boardList";
+	}
+	
+	@PostMapping(value="/boardLikes")
+	@ResponseBody
+	public Map<String, Object> boardLikes(@ModelAttribute LikesDTO likesDto){
+		
+		logger.info("likes : " + likesDto.toString());
+		
+		return null;
 	}
 	
 	

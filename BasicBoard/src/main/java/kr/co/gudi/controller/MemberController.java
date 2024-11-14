@@ -63,7 +63,7 @@ public class MemberController {
 		
 		session.removeAttribute("loginId");
 		
-		return "boardList";
+		return "redirect:/";
 	}
 	
 	

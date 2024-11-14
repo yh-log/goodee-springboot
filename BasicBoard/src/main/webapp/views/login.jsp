@@ -49,8 +49,6 @@
 				
 				if(data.success){
 					window.location.href=data.nextPage; 
-					console.log(data.nextPage);
-					console.log('login success');
 				}else{
 					alert('아이디 비밀번호를 확인하세요');
 					location.href=data.nextPage;

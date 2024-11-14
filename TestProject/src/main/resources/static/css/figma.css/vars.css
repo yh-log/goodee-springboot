@@ -1,0 +1,118 @@
+/* @charset "UTF-8";
+
+:root {
+  --class101net-athens-gray: #f4f4f7; 연한 회색
+  --class101net-black: #000000; 검정
+  --class101net-black-10: rgba(0, 0, 0, 0.1); 10% 투명도 검정
+  --class101net-black-3: rgba(0, 0, 0, 0.03); 3% 투명도 검정
+  --class101net-black-5: rgba(0, 0, 0, 0.05); 5% 투명도 검정
+  --class101net-blaze-orange: #ff5d00; 밝은 주황색
+  --class101net-cod-gray: #0c0c0c; 아주 어두운 회색
+  --class101net-concrete: #f3f3f3; 밝은 회색
+  --class101net-cornflower-blue: #5a7afb; 콘플라워 블루 (진한 파랑)
+  --class101net-dusty-gray: #949494; 먼지 회색
+  --class101net-international-orange: #ff5d00; 국제 주황색
+  --class101net-mine-shaft: #202020; 광산 회색 (어두운 회색)
+  --class101net-mine-shaft-75: rgba(51, 51, 51, 0.75); 75% 투명도 어두운 회색
+  --class101net-mine-shaft-80: rgba(55, 55, 55, 0.8); 80% 투명도 어두운 회색
+  --class101net-white: #ffffff; 흰색
+  --class101net-white-5: rgba(255, 255, 255, 0.05); 5% 투명도 흰색
+  --class101net-white-80: rgba(255, 255, 255, 0.8); 80% 투명도 흰색
+  --class101net-white-white: linear-gradient(to left, #ffffff, #ffffff); 좌우로 흰색 그라데이션
+}
+
+:root {
+  --fontssetttings-font-family: Preahvihear-Regular, sans-serif; 주 글꼴 설정
+  --fontssetttings-font-size: 16px; 기본 글꼴 크기
+  --fontssetttings-line-height: normal; 기본 줄 간격
+  --fontssetttings-font-weight: 400; 글꼴 두께 (보통)
+  --fontssetttings-font-style: normal; 기울임 없음
+}
+
+
+:root {
+  --shadow1-box-shadow: 0px 4px 13px 0px rgba(0, 0, 0, 0.12); 약한 그림자 효과
+  --mainprofile-box-shadow: 0px 4px 10px -2px rgba(0, 0, 0, 0.25); 프로필 그림자
+  --shadow-r-b-box-shadow: 4px 4px 13px -4px rgba(0, 0, 0, 0.12); 오른쪽 아래 그림자
+}
+ */
+ 
+ 
+ /* Global Styles */
+:root {
+  /* Colors */
+  --gradient-orange-to-white: linear-gradient(
+    0deg,
+    rgba(245, 103, 0, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  --athens-gray: #f4f4f7;
+  --black: #000000;
+  --black-10: rgba(0, 0, 0, 0.1);
+  --black-3: rgba(0, 0, 0, 0.03);
+  --black-5: rgba(0, 0, 0, 0.05);
+  --blaze-orange: #ff5d00;
+  --cod-gray: #0c0c0c;
+  --concrete: #f3f3f3;
+  --cornflower-blue: #5a7afb;
+  --dusty-gray: #949494;
+  --international-orange: #ff5d00;
+  --mine-shaft: #202020;
+  --mine-shaft-75: rgba(51, 51, 51, 0.75);
+  --mine-shaft-80: rgba(55, 55, 55, 0.8);
+  --white: #ffffff;
+  --white-5: rgba(255, 255, 255, 0.05);
+  --white-80: rgba(255, 255, 255, 0.8);
+  --white-gradient: linear-gradient(to left, #ffffff, #ffffff);
+
+  /* Fonts */
+  --font-family-main: 'Preahvihear-Regular', sans-serif;
+  --font-size-base: 16px;
+  --font-weight-regular: 400;
+  --line-height-normal: 1.5;
+
+  --font-size-small: 12px;
+  --font-size-medium: 14px;
+  --font-size-large: 20px;
+  --font-size-xlarge: 24px;
+  --font-size-xxlarge: 32px;
+  --line-height-small: 16px;
+  --line-height-medium: 18px;
+  --line-height-large: 26px;
+  --line-height-xlarge: 32px;
+  --line-height-xxlarge: 40px;
+
+  /* Button Styles */
+  --button-font-family: 'Preahvihear-Regular', sans-serif;
+  --button-font-size-small: 11px;
+  --button-font-size-medium: 14px;
+  --button-font-size-large: 16px;
+  --button-line-height-small: 14px;
+  --button-line-height-medium: 18px;
+  --button-line-height-large: 20px;
+
+  /* Heading Styles */
+  --heading-font-family: 'Preahvihear-Regular', sans-serif;
+  --heading-font-size-small: 16px;
+  --heading-font-size-medium: 20px;
+  --heading-font-size-large: 24px;
+  --heading-line-height-small: 20px;
+  --heading-line-height-medium: 26px;
+  --heading-line-height-large: 32px;
+
+  /* Link Styles */
+  --link-font-family: 'Preahvihear-Regular', sans-serif;
+  --link-font-size-small: 10px;
+  --link-font-size-medium: 11px;
+  --link-font-size-large: 12px;
+  --link-line-height-small: 12px;
+  --link-line-height-medium: 14px;
+  --link-line-height-large: 16px;
+
+  /* Shadows */
+  --shadow-small: 0px 4px 13px 0px rgba(0, 0, 0, 0.12);
+  --shadow-main: 0px 4px 10px -2px rgba(0, 0, 0, 0.25);
+  --shadow-soft: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+  --shadow-right-bottom: 4px 4px 13px -4px rgba(0, 0, 0, 0.12);
+}
+ 

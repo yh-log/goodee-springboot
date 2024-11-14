@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.gudi.dao.BoardMapper">
+
+<!--     게시글 저장
+    <insert id="insertBoard" parameterType="BoardDTO">
+        INSERT INTO board (user_name, subject, content)
+        VALUES (#{user_name}, #{subject}, #{content});
+    </insert>
+   
+
+    파일 저장
+    <insert id="insertFile" parameterType="FileDTO">
+        INSERT INTO file (idx, ori_filename, new_filename, file_url)
+        VALUES (#{idx}, #{ori_filename}, #{new_filename}, #{file_url});
+    </insert> -->
+    
+    <insert id="submitPost" 
+    	useGeneratedKeys="true"
+    	keyColumn="idx"
+    	keyProperty="idx"
+    	parameterType="kr.co.gudi.dto.BoardDTO">
+    	
+    	INSERT INTO board(user_name, subject, content) VALUES(#{user_name}, #{subject}, #{content})
+    
+    </insert>
+    
+    <insert id="fileWrite" parameterType="kr.co.gudi.dto.FileDTO">
+    	INSERT INTO file(idx, ori_filename, new_filename) VALUES(#{idx}, #{ori_filename}, #{new_filename})
+    	
+    </insert>
+
+</mapper>

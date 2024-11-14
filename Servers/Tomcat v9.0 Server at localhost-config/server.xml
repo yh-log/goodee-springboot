@@ -163,8 +163,9 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
 	  <Context docBase="C:/upload" path="/photo"/>
+	  <Context docBase="C:/uploadTemporary" path="/photo-temp"/>
 
-      <Context docBase="24_Board" path="/24_Board" reloadable="true" source="org.eclipse.jst.jee.server:24_Board"/></Host>
+      <Context docBase="ErunJrun" path="/" reloadable="true" source="org.eclipse.jst.jee.server:ErunJrun"/></Host>
     </Engine>
   </Service>
 </Server>

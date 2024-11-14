@@ -66,13 +66,14 @@
 		</form>
 		<span>
 			<img src="/img/likeFalse.png" width="20px" id="likeImg"/>
-			<button type="button" onclick="likes()" id="likeBtn">좋아요</button>
 			<span id="likeNum"></span>
+			<button type="button" onclick="likes()" id="likeBtn">좋아요</button>
 		</span>
 	</div>
 </body>
 <script>
 
+  	
 	commentList();
 
 
@@ -155,14 +156,49 @@
 	    
 	}
 	
+	// 서버로 넘길 정보 (id, 좋아요 눌림, 게시글 넘버)
 	
-	function likes(){
-		$('#likeImg').attr('src', '/img/likeTrue.png');
-		
-		//좋아요가 눌릴 경우 +1 (또 눌릴 경우 빼는건 나중에)
-		
-		
-		
+	function likes() {
+	    var likeImg = $('#likeImg'); // likeImg 변수 정의
+	    var currentSrc = likeImg.attr('src'); // 이미지 src 속성 가져오기
+	    
+	    var member_id = "${sessionScope.loginId}";
+	    
+	    // 기존 src 속성 값을 가져와서 현재와 동일하면 바꾸고, 다르면 기존 이미지로
+	    if (currentSrc == '/img/likeFalse.png') {
+	        likeImg.attr('src', '/img/likeTrue.png');
+	        
+	        $.ajax({
+	        	type: 'POST',
+	        	url: '/boardLikes'
+	        	data: {'board_idx' : ${detail.idx},
+	        			'member_id' : member_id
+	        	},
+	        	dataType: 'JSON',
+	        	success: function(data){
+			        console.log('좋아요');
+	        	},error: function(e){
+	        		console.log(e);
+	        	}
+	        });
+	        
+	    } else {
+	        likeImg.attr('src', '/img/likeFalse.png');
+	        
+	        $.ajax({
+	        	type: 'DELETE',
+	        	url: '/boardLikes'
+	        	data: {'board_idx' : ${detail.idx},
+	        			'member_id' : member_id
+	        	},
+	        	dataType: 'JSON',
+	        	success: function(data){
+			        console.log('좋아요 취소');
+	        	},error: function(e){
+	        		console.log(e);
+	        	}
+	        });
+	    }
 	}
 	
 

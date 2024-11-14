@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.dao.BoardDAO">
+	<select id="getList" parameterType="int">
+		SELECT idx, subject, user_name, bHit, reg_date FROM bbs ORDER BY idx DESC LIMIT #{limit}, #{offset}
+	</select>
+	
+	<insert id="write" parameterType="kr.co.gudi.dto.BoardDTO">
+		INSERT INTO bbs(user_name, subject, content) VALUES(#{user_name}, #{subject}, #{content})
+	</insert>
+	
+</mapper>
