@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+	<h3 id="return"></h3>
+	<input type="text" id="msg"/>
+	<button onclick="getSend()">get 방식으로 전송</button>
+	<br/><br/>
+	<input type="number" id="cnt"/>
+	<button onclick="postSend()">post 방식으로 전송</button>
+	<br/><br/>
+	<button onclick="fluxTest()">flux 방식으로 통신</button>
+</body>
+<script>
+
+	function fluxTest(){
+		$.ajax({
+			type: 'GET',
+			url: '/get/flux',
+			data: {},
+			dataType: 'JSON',
+			success: function(data){
+				console.log(data);
+			},error: function(e){
+				console.log(e);
+			}
+		});
+	}
+
+
+	// 입력된 숫자만큼의 크기를 갖는 리스트를 반환
+	function postSend(){
+		// 헤더 : 본문보다 먼저 읽혀지는 내용으로 주요 규격이나 먼저 알아야 할 사항들이 명시되어 있다.
+		// 		  -> 키를 넣는 방식 1. 파라미터에 넣는 방식 2. 헤더에 넣는 방식
+		//			-> 보안이 중요하지 않은 경우 1번 방식으로 많이 사용하고, 
+		//			-> 누가 얼마나 사용했는지 또는 검증이 필요할 때에 키를 사용하고 보통 파라미터에 붙여준다.
+		//			-> 하지만 진짜 보안성이 중요할 때에는 헤더에 붙여준다!
+		$.ajax({
+			type: 'POST',
+			url: '/post/send/'+$('#cnt').val(),
+			data: {},
+			dataType: 'JSON',
+			beforeSend: function(obj){ // 전송 전에 해줘야 할일이 여기에 들어간다. 
+				// Authorization : 이 이름을 많이 사용하고, 값은 16진수로 보통 많이 넣어준다.
+				obj.setRequestHeader("Authorization", "ASDFG456789F"); // 요청시 헤더에 무언가를 넣겠다. (이름 , 값) - 이름 같으면 덮어씀
+			},
+			success: function(data){
+				console.log(data);
+			},error: function(e){
+				console.log(e);
+			}
+		});
+	}
+	function getSend(){
+		$.ajax({
+			type: 'GET',
+			url: '/get/'+$('#msg').val(),
+			dataType: 'JSON',
+			data: {},
+			success: function(data){
+				console.log(data);
+				$('#return').html(JSON.stringify(data)); // object 데이터를 문자열로 변형
+			},error: function(e){
+				console.log(e);
+			}
+		});
+	}
+
+</script>
+</html>

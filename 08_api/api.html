@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    호출 API : 
+    <select>
+        <option value="getUltraSrtNcst">초 단기 실황</option>
+    </select>
+    <br/>
+    요청 날짜 : <input type="text" id="base_date" value="20241120"/> <br/>
+    요청 시간 : <input type="text" id="base_time" value="1500"/> <br/>
+    요청 지역 : x좌표 <input type="text" id="nx" value="58"/> y좌표 <input type="text" id="ny" value="125"/>
+
+
+    <button onclick="apiCall()">예보 정보 호출</button>
+</body>
+<script>
+// Encoding key (인코딩 된 키)
+// UddzTt5gm3RvChbgUjWt9blg3VVJu0IF4TfEULdi140e%2F1Aj%2BWMrgitUyyxDwYDl8tNNE9uJgFFnnp3kUun%2BGA%3D%3D
+
+// Decoding key (디코딩 된 키)
+// UddzTt5gm3RvChbgUjWt9blg3VVJu0IF4TfEULdi140e/1Aj+WMrgitUyyxDwYDl8tNNE9uJgFFnnp3kUun+GA==
+
+    // 서비스 url
+    // http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst
+    
+    // 요청 메세지 예시 : http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=인증키&numOfRows=10&pageNo=1&base_date=20210628&base_time=0600&nx=55&ny=127
+    // http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=UddzTt5gm3RvChbgUjWt9blg3VVJu0IF4TfEULdi140e%2F1Aj%2BWMrgitUyyxDwYDl8tNNE9uJgFFnnp3kUun%2BGA%3D%3D&numOfRows=10&pageNo=1&base_date=20241120&base_time=1300&nx=58&ny=125&dataType=JSON
+    
+    // serviceKey=인증키
+    // numOfRows=10&
+    // pageNo=1&
+    // base_date=20210628&
+    // base_time=0600&
+    // nx=55&ny=127
+    // dataType=JSON
+    
+    // ajax로 쏴서 콘솔로 받기 (파라메터 나눠서 url로 통으로 넣지 x, 변수에 값을 넣어서 보내기)
+    
+    function apiCall(){
+        var url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/";
+        var key = "UddzTt5gm3RvChbgUjWt9blg3VVJu0IF4TfEULdi140e%2F1Aj%2BWMrgitUyyxDwYDl8tNNE9uJgFFnnp3kUun%2BGA%3D%3D";
+        var dkey = "UddzTt5gm3RvChbgUjWt9blg3VVJu0IF4TfEULdi140e/1Aj+WMrgitUyyxDwYDl8tNNE9uJgFFnnp3kUun+GA==";
+
+        var req = $('select option:selected').val();
+        var urlReq = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/' + $('select option:selected').val();
+
+        var param = {
+            serviceKey:dkey,
+            numOfRows:10,
+            pageNo:1,
+            base_date:$('#base_date').val(),
+            base_time:$('#base_time').val(),
+            nx:$('#nx').val(),
+            ny:$('#ny').val(),
+            dataType:'JSON'
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: urlReq,
+            data: param,
+            dataType: 'JSON',
+            success: function(data){
+                console.log('받아온 예보 정보 => ', data.response.body.items);
+            },error: function(e){
+                console.log('에러 => ', e);
+            }
+        });
+    }
+    
+</script>
+</html>

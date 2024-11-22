@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace="kr.co.gudi.mapper.BoardMapper">
+
+	<!-- 게시글 목록 -->
+	<select id="list" resultType="kr.co.gudi.vo.BoardVO">
+		SELECT idx, subject, user_name, bHit, reg_date FROM bbs ORDER BY idx DESC LIMIT #{param1}
+	</select>
+	
+	<!-- 상세 보기 -->
+	<update id="upHit">
+		UPDATE bbs SET bHit = bHit+1 WHERE idx = #{param1}
+	</update>
+	
+	<select id="detail" resultType="kr.co.gudi.vo.BoardVO">
+		SELECT * FROM bbs WHERE idx = #{param1}
+	</select>
+	
+	<select id="files" resultType="kr.co.gudi.vo.FilesVO">
+		SELECT * FROM files WHERE idx = #{param1}
+	</select>
+	
+	<!-- 게시글 쓰기 -->
+	<insert id="write" parameterType="kr.co.gudi.vo.BoardVO"
+		useGeneratedKeys="true" keyColumn="idx" keyProperty="idx">
+		INSERT INTO bbs (user_name, subject, context) VALUES (#{user_name}, #{subject}, #{context})
+	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+		DELETE FROM bbs WHERE idx = ${param}
+	</delete>
+
+</mapper>
